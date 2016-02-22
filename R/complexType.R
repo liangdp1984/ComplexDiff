@@ -43,7 +43,6 @@
 #' 
 
 complexType <- function(count, cutoff=50L, fold=10, h=0.1, plot=TRUE){
-    library(matrixStats)
     stopifnot(is.matrix(count) && ncol(count) == 2)
     stopifnot(is.numeric(cutoff) && length(cutoff) == 1 && cutoff >= 0)
     stopifnot(is.numeric(fold) && length(fold) == 1 && fold > 1)

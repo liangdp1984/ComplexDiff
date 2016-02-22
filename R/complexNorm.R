@@ -20,7 +20,6 @@
 #' & treatment). This parameter is only appliable when \code{sanity} is
 #' TRUE. (Default: NULL)
 #'
-#'
 #' @return
 #' A numeric vector indicating estimated size of samples.
 #'

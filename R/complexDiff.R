@@ -44,7 +44,12 @@
 #' @details
 #' If 'ttest' is selected, ... 
 #' 
-#' @import matrixStats,GenomicRanges,bumphunter,DESeq2,limma,genefilter
+#' @import matrixStats
+#' @import GenomicRanges
+#' @import bumphunter
+#' @import DESeq2
+#' @import limma
+#' @import genefilter
 #' 
 #' @return
 #' A list with the following components:
@@ -62,12 +67,6 @@
 complexDiff <- function(count, bins, meta, design, sizefac,
                         rccut=15, fccut=0.4, gap=2,
                         diffmeth=c("DESeq2","limma","ttest")){
-    library(matrixStats)
-    library(GenomicRanges)
-    library(bumphunter)
-    library(DESeq2)
-    library(limma)
-    library(genefilter)
     stopifnot(is.matrix(count) && ncol(count) >= 2)
     stopifnot(class(bins) == "GRanges" && length(bins) == nrow(count))
     stopifnot(is.data.frame(meta) && ncol(meta)>=1)

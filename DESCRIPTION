@@ -1,0 +1,21 @@
+Package: ComplexDiff
+Title: Differential Binding Estimation for Protein Complexes
+Version: 0.99.0
+Author: Mingxiang Teng and Rafael A. Irizarry
+Maintainer: Mingxiang Teng <tengmx@gmail.com>
+Description: Differential Binding Estimation for Protein Complexes
+Depends:
+    R (>= 3.2.2)
+Imports:
+    matrixStats,
+    GenomicRanges,
+    Rsamtools,
+    rtracklayer,
+    Rsubread,
+    bumphunter,
+    DESeq2,
+    limma,
+    genefilter
+License: GPL-3
+LazyData: true
+RoxygenNote: 5.0.1

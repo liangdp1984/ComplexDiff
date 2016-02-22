@@ -29,7 +29,10 @@
 #' Rsubread. This parameter is only appliable when
 #' \code{samples} are bam files. (Default: TRUE)
 #' 
-#' @import Rsamtools,rtracklayer,Rsubread,matrixStats
+#' @import Rsamtools
+#' @import rtracklayer
+#' @import Rsubread
+#' @import matrixStats
 #'
 #' @return
 #' A list with the following components:
@@ -45,10 +48,6 @@
 
 regionCounts <- function(samples, peaks=NULL, binsize=300L, bincut=0L,
                        readlen=NULL, read2pos='5', ignoreDup=TRUE){
-    library(Rsamtools)
-    library(rtracklayer)
-    library(Rsubread)
-    library(matrixStats)
     stopifnot(is.character(samples))
     stopifnot(is.null(peaks) || class(peaks)=="GRanges")
     stopifnot(is.numeric(binsize) && length(binsize) == 1 &&
