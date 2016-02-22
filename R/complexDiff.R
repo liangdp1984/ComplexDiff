@@ -79,7 +79,6 @@ complexDiff <- function(count, bins, meta, design, sizefac,
     stopifnot(is.numeric(rccut) && length(rccut) == 1 && rccut >= 0)
     stopifnot(is.numeric(fccut) && length(fccut) == 1 && fccut > 0)
     stopifnot(is.numeric(gap) && length(gap) == 1 && gap >= 0)
-    stopifnot(is.logical(permute) && length(permute) == 1)
     diffmeth <- match.arg(diffmeth)
     if(diffmeth=="ttest"){
         paired <- FALSE
