@@ -82,8 +82,10 @@
 #' ## return values
 #' names(cdiff)
 #' cdiff$region
-#' hist(width(cdiff$region),nclass=30,xlab="region width",main="")
-#' hist(-log10(cdiff$diff$pvalue),nclass=30,xlab="-log10 pvalue",main="")
+#' hist(width(cdiff$region),nclass=30,xlab="region width",
+#' main="Width of potential differential regions")
+#' hist(-log10(cdiff$diff$pvalue),nclass=30,xlab="-log10 pvalue",
+#' main="Estimated significance")
 
 complexDiff <- function(count, bins, meta, design, sizefac,
                         rccut=15, fccut=0.4, gap=2,
