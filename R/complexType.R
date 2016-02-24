@@ -31,7 +31,8 @@
 #' @param plot A logical indicator that if MA plot and smoothed kernal density
 #' should be visualized. (Default: TRUE)
 #'
-#' @import matrixStats
+#' @importFrom matrixStats rowMaxs
+#' @importFrom matrixStats rowDiffs
 #'
 #' @return
 #' A character with value either "bimodel" or "unimodel",
@@ -40,7 +41,12 @@
 #' @export
 #' 
 #' @examples
-#' 
+#' ## load sample data
+#' data(complex)
+#' names(complex)
+#'
+#' ## test sample data
+#' complexType(complex$counts)
 
 complexType <- function(count, cutoff=50L, fold=10, h=0.1, plot=TRUE){
     stopifnot(is.matrix(count) && ncol(count) == 2)

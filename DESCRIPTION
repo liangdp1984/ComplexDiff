@@ -1,13 +1,16 @@
 Package: ComplexDiff
-Title: Differential Binding Estimation for Protein Complexes
 Version: 0.99.0
+Title: Differential Binding Estimation for Protein Complexes
+Description: This package provide functions to estimate differential DNA
+    bindings by protein complexes using ChIP-Seq data. 
 Author: Mingxiang Teng and Rafael A. Irizarry
 Maintainer: Mingxiang Teng <tengmx@gmail.com>
-Description: Differential Binding Estimation for Protein Complexes
 Depends:
     R (>= 3.2.2)
 Imports:
     matrixStats,
+    IRanges,
+    GenomeInfoDb,
     GenomicRanges,
     Rsamtools,
     rtracklayer,
@@ -16,6 +19,11 @@ Imports:
     DESeq2,
     limma,
     genefilter
+Suggests:
+    BiocStyle,
+    knitr,
+    rmarkdown
+URL: https://github.com/tengmx/ComplexDiff
 License: GPL-3
 LazyData: true
 RoxygenNote: 5.0.1

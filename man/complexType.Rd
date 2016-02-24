@@ -48,6 +48,11 @@ the count matrix); otherwise, coverage difference acorss replicates
 might bias determination.
 }
 \examples{
+## load sample data
+data(complex)
+names(complex)
 
+## test sample data
+complexType(complex$counts)
 }
 

@@ -27,7 +27,8 @@
 #' @param plot A logical indicator that if MA plot and smoothed kernal density
 #' should be visualized. (Default: FALSE)
 #'
-#' @import matrixStats
+#' @importFrom matrixStats rowMaxs
+#' @importFrom matrixStats rowDiffs
 #'
 #' @return
 #' A list with the following conponents:
@@ -39,7 +40,12 @@
 #' @export
 #' 
 #' @examples
-#' 
+#' ## load sample data
+#' data(complex)
+#' names(complex)
+#'
+#' ## test sample data
+#' complexNormPair(complex$counts)
 
 complexNormPair <- function(count, cutoff=50L, fold=10, h=0.1, plot=FALSE){
     stopifnot(is.matrix(count) && ncol(count) == 2)

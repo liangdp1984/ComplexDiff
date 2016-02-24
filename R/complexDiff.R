@@ -44,12 +44,20 @@
 #' @details
 #' If 'ttest' is selected, ... 
 #' 
-#' @import matrixStats
+#' @importFrom matrixStats rowMaxs
+#' @import IRanges
 #' @import GenomicRanges
 #' @import bumphunter
-#' @import DESeq2
-#' @import limma
-#' @import genefilter
+#' @importFrom DESeq2 DESeqDataSetFromMatrix
+#' @importFrom DESeq2 sizeFactors
+#' @importFrom DESeq2 sizeFactors<-
+#' @importFrom DESeq2 DESeq
+#' @importFrom DESeq2 results
+#' @importFrom limma voom
+#' @importFrom limma eBayes
+#' @importFrom limma topTable
+#' @importFrom limma lmFit
+#' @importFrom genefilter rowttests
 #' 
 #' @return
 #' A list with the following components:
@@ -62,7 +70,20 @@
 #' @export
 #' 
 #' @examples
-#' 
+#' ## load sample data
+#' data(complex)
+#' names(complex)
+#'
+#' ## test sample data
+#' sizefac <- complexNorm(complex$counts,plot=TRUE)
+#' meta <- data.frame(cond=c("ctr","tre"))
+#' cdiff <- complexDiff(complex$counts,complex$bins,meta,design=~cond,sizefac)
+#'
+#' ## return values
+#' names(cdiff)
+#' cdiff$region
+#' hist(width(cdiff$region),nclass=30,xlab="region width",main="")
+#' hist(-log10(cdiff$diff$pvalue),nclass=30,xlab="-log10 pvalue",main="")
 
 complexDiff <- function(count, bins, meta, design, sizefac,
                         rccut=15, fccut=0.4, gap=2,
@@ -112,7 +133,8 @@ complexDiff <- function(count, bins, meta, design, sizefac,
         design <- model.matrix(design, data = meta)
         dcb <- voom(countsub, design, lib.size=libsize)
         fit <- eBayes(lmFit(dcb,design))
-        diffR <- topTable(fit,coef=ncol(design),sort="none",num=nrow(fit))
+        diffR <- topTable(fit,coef=ncol(design),sort.by="none",
+                          number=nrow(fit))
         log2fc <- diffR$logFC
     }else{
         logcountsub <- log2(t(t(countsub)/sizefac)+0.5)
@@ -144,7 +166,7 @@ complexDiff <- function(count, bins, meta, design, sizefac,
     }else if(diffmeth=="limma"){
         dcb <- voom(regionCount, design, lib.size=libsize)
         fit <- eBayes(lmFit(dcb,design))
-        limm <- topTable(fit,coef=ncol(design),sort="none",num=nrow(fit))
+        limm <- topTable(fit,coef=ncol(design),sort.by="none",number=nrow(fit))
         diffR <- data.frame(limm$t,limm$logFC,limm$P.Value)
     }else{
         logregionrc <- log2(t(t(regionCount)/sizefac)+0.5)

@@ -69,6 +69,19 @@ overlapping exists, as done by function \code{regionCounts}.
 If 'ttest' is selected, ...
 }
 \examples{
+## load sample data
+data(complex)
+names(complex)
 
+## test sample data
+sizefac <- complexNorm(complex$counts,plot=TRUE)
+meta <- data.frame(cond=c("ctr","tre"))
+cdiff <- complexDiff(complex$counts,complex$bins,meta,design=~cond,sizefac)
+
+## return values
+names(cdiff)
+cdiff$region
+hist(width(cdiff$region),nclass=30,xlab="region width",main="")
+hist(-log10(cdiff$diff$pvalue),nclass=30,xlab="-log10 pvalue",main="")
 }
 

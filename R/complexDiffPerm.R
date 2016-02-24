@@ -48,12 +48,7 @@
 #' @details
 #' If 'ttest' is selected, ... 
 #' 
-#' @import matrixStats
 #' @import GenomicRanges
-#' @import bumphunter
-#' @import DESeq2
-#' @import limma
-#' @import genefilter
 #' 
 #' @return
 #' A list with the following components:
@@ -65,8 +60,7 @@
 #'
 #' @export
 #' 
-#' @examples
-#' 
+
 
 complexDiffPerm <- function(count, bins, meta, design, sizefac,
                             rccut=15, fccut=0.4, gap=2,

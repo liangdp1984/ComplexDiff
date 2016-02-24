@@ -28,11 +28,14 @@
 #' @param ignoreDup Parameter of function \code{featureCounts} in package
 #' Rsubread. This parameter is only appliable when
 #' \code{samples} are bam files. (Default: TRUE)
-#' 
+#'
+#' @importFrom matrixStats rowMaxs
+#' @import IRanges
+#' @import GenomeInfoDb
+#' @import GenomicRanges
 #' @import Rsamtools
 #' @import rtracklayer
 #' @import Rsubread
-#' @import matrixStats
 #'
 #' @return
 #' A list with the following components:
@@ -44,6 +47,13 @@
 #' @export
 #' 
 #' @examples
+#' library(GenomicRanges)
+#' bams <- c(system.file("extdata", "control.bam", package="ComplexDiff"),
+#'           system.file("extdata", "treated.bam", package="ComplexDiff"))
+#' bins <- GRanges("chr1",IRanges(start = seq(1000000,2000000,300),
+#'                       end = seq(1000000,2000000,300)+300-1))
+#' rc <- regionCounts(bams,peaks=bins)
+#' names(rc)
 #' 
 
 regionCounts <- function(samples, peaks=NULL, binsize=300L, bincut=0L,
@@ -91,8 +101,8 @@ regionCounts <- function(samples, peaks=NULL, binsize=300L, bincut=0L,
                            Chr=seqnames(regions), Start=start(regions),
                            End=end(regions), Strand=strand(regions))
         count <- featureCounts(files=samples, annot.ext=anno,
-                               read2pos=read2pos, ignoreDup=ignoreDup,
-				...)$counts
+                               read2pos=read2pos, ignoreDup=ignoreDup
+				)$counts
     }else{
         ## bigwig files
         count <- c()

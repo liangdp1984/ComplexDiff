@@ -39,6 +39,12 @@ for scaling factor estimates across multiple samples, i.e. replicates
 and conditions.
 }
 \examples{
+## load sample data
+data(complex)
+names(complex)
 
+## test sample data
+complexNorm(complex$counts)
+complexNorm(complex$counts,sanity=TRUE,samfac=factor(c("ctr","tre")))
 }
 

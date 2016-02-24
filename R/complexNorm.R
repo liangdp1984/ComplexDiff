@@ -26,7 +26,13 @@
 #' @export
 #' 
 #' @examples
+#' ## load sample data
+#' data(complex)
+#' names(complex)
 #' 
+#' ## test sample data
+#' complexNorm(complex$counts)
+#' complexNorm(complex$counts,sanity=TRUE,samfac=factor(c("ctr","tre")))
 
 complexNorm <- function(count, cutoff=50L, fold=10, h=0.1, plot=FALSE,
                         sanity=FALSE, samfac=NULL){

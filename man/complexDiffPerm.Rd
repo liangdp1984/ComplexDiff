@@ -74,7 +74,4 @@ experiment designs.
 \details{
 If 'ttest' is selected, ...
 }
-\examples{
-
-}
 

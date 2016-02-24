@@ -47,6 +47,11 @@ for normalization. This function serves as the basis for function
 scaling factor estimates across replicates and conditions.
 }
 \examples{
+## load sample data
+data(complex)
+names(complex)
 
+## test sample data
+complexNormPair(complex$counts)
 }
 
