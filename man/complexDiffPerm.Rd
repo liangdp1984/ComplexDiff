@@ -65,13 +65,28 @@ log2 fold change, p-value and permutation p-value}
 }
 \description{
 This function does differential binding estimation and additional
-permutation analysis. For differential binding estimation, see
+permutation analysis. This function works only if multiple replicates
+are provided for comparison. For differential binding estimation, see
 function \code{complexDiff}. Permutation analysis is obtained by
 shuffling samples between compared conditions. Customized shuffling
 can also be specified by parameter \code{permute} for complicated
 experiment designs.
 }
 \details{
-If 'ttest' is selected, ...
+Three methods are provided for significance estimation of differential
+binding. \code{DESeq2} allows pseudo-estimation for comparisons without
+replicates; otherwise, all methods can be used for comparisons with at
+least two replicates. The \code{design} formula can be specified as
+suggested by \code{DESeq2} and \code{limma} if these two methods are
+selected. For \code{ttest}, \code{design} can either contain one or two
+components, referring to student's t-test or paired t-test based on
+logarithm scaled data. For consistance with other packages, the last
+component in \code{design} formula is the contrast on which the final
+differential estimation are reported.
+
+The default permutation works on the main contrast only (the last
+component in \code{design} formula). If customized permutation needed,
+e.g. invloving several components in \code{design} formula, users should
+provided the indecies of permutations through parameter \code{permute}.
 }
 
