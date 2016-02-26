@@ -42,7 +42,16 @@
 #' (Default: 'DESeq2')
 #'
 #' @details
-#' If 'ttest' is selected, ... 
+#' Three methods are provided for significance estimation of differential
+#' binding. \code{DESeq2} allows pseudo-estimation for comparisons without
+#' replicates; otherwise, all methods can be used for comparisons with at
+#' least two replicates. The \code{design} formula can be specified as
+#' suggested by \code{DESeq2} and \code{limma} if these two methods are
+#' selected. For \code{ttest}, \code{design} can either contain one or two
+#' components, referring to student's t-test or paired t-test based on
+#' logarithm scaled data. For consistance with other packages, the last
+#' component in \code{design} formula is the contrast on which the final
+#' differential estimation are reported.
 #' 
 #' @importFrom matrixStats rowMaxs
 #' @import IRanges
