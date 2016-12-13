@@ -1,0 +1,68 @@
+---
+title: "The *ComplexDiff* user's guide"
+author: |
+  | Mingxiang Teng <mxteng@jimmy.harvard.edu>
+  | Rafael A. Irizarry <rafa@jimmy.harvard.edu>
+  | Department of Biostatistics, Dana-Farber Cancer Institute &
+  | Harvard T.H. Chan School of Public Health, Boston, MA, USA
+date: "`r Sys.Date()`"
+output:
+  BiocStyle::pdf_document:
+    toc: true
+bibliography: ComplexDiff.bib
+graphics: yes
+vignette: >
+  %\VignetteIndexEntry{The ComplexDiff user's guide}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignettePackage{ComplexDiff}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r para, echo = FALSE, results='hide'}
+BiocStyle::markdown()
+knitr::opts_chunk$set(dev="png",fig.show="hold",
+               fig.width=8,fig.height=4.5,fig.align="center",
+               message=FALSE,collapse=TRUE)
+set.seed(1)
+```
+
+# Introduction
+
+Comparing protein binding differences between biological conditions can be
+accomplished 
+
+
+# Getting Started
+
+Load the package in R
+
+```{r library}
+library(ComplexDiff)
+```
+
+# Preparing Inputs
+
+
+# Differential Binding Regions
+
+For  algorithms details, please refer to our manuscript [@teng].
+
+## Count reads for genomic regions
+
+
+## Determine protein binding type
+
+
+## Estimate normalization size factors
+
+
+## Identify differential binding regions
+
+
+## Optional permutation analysis
+
+
+# Summary
+
+
+# References

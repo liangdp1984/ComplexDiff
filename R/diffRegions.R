@@ -83,13 +83,13 @@
 #' ## test sample data
 #' sizefac <- sizeFac(complex$counts,plot=TRUE)$sizefac
 #' meta <- data.frame(cond=c("ctr","tre"))
-#' cdiff <- diffRegions(complex$counts,complex$bins,meta,design=~cond,sizefac)
+#' dr <- diffRegions(complex$counts,complex$bins,meta,design=~cond,sizefac)
 #'
 #' ## return values
-#' cdiff
-#' hist(width(cdiff),nclass=30,xlab="region width",
+#' dr
+#' hist(width(dr),nclass=30,xlab="region width",
 #'      main="Width of potential differential regions")
-#' hist(-log10(cdiff$pvalue),nclass=30,xlab="-log10 pvalue",
+#' hist(-log10(dr$pvalue),nclass=30,xlab="-log10 pvalue",
 #'      main="Estimated significance")
 
 diffRegions <- function(count, bins, meta, design, sizefac,

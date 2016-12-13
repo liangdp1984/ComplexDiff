@@ -98,7 +98,7 @@ names(complex)
 ## test sample data
 sizefac <- sizeFac(complex$counts,plot=TRUE)$sizefac
 meta <- data.frame(cond=c("ctr","tre"))
-cdiff <- diffRegionsWithPerm(complex$counts,complex$bins,
-                             meta,design=~cond,sizefac)
+dr <- diffRegionsWithPerm(complex$counts,complex$bins,
+                          meta,design=~cond,sizefac)
 }
 

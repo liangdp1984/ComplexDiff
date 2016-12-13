@@ -21,7 +21,7 @@
 #' high coverage candidates. This parameter is only appliable when
 #' \code{peaks=NULL}. (Default: 0)
 #' @param readlen Sample fragment length with which BIGWIG files created.
-#' The signal in BIGWIG file is \code(readlen) times of original reads
+#' The signal in BIGWIG file is \code{readlen} times of original reads
 #' number. One way to count original reads is to privde \code{readlen} here.
 #' This parameter is only appliable when \code{samples} are BIGWIG files.
 #' If \code{NULL}, it is recommended to multiply \code{bincut} by a scale

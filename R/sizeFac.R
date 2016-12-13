@@ -2,7 +2,7 @@
 #'
 #' @description This function estimates sample size factors for normalization
 #' purpose in downsteam analysis. Size factors of sample pairs are
-#' estimated firstly by comparing samples to the same sample (*i.e.* the
+#' estimated firstly by comparing samples to the same sample (i.e. the
 #' sample corresponding to first column of count matrix). Then, size factors
 #' are combined across all samples with the median size factor as 1.
 #' In detail, binding type is first estimated using the same strategy as
@@ -30,8 +30,8 @@
 #' density should be visualized. (Default: FALSE)
 #' @param sanity A logical indicator if checking sanity across replicates
 #' in the same conditions. A negative report of sanity check indicates
-#' either a bad experiment (*e.g.* binding type is not consistent across
-#' replicates) or a bad initiation of function parameters (*e.g.*
+#' either a bad experiment (e.g. binding type is not consistent across
+#' replicates) or a bad initiation of function parameters (e.g.
 #' \code{cutoff} and \code{fold} are not pre-estimated well). However,
 #' a negative report of sanity check doesn't neccessarily mean a bad
 #' estimation of size factors, as the strategy of hunting kernal density
