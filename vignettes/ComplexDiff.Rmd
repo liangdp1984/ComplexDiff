@@ -28,13 +28,24 @@ set.seed(1)
 
 # Introduction
 
-Comparing protein binding differences between biological conditions can be
-accomplished 
+Identify protein binding differences using ChIP-Seq data involves comparing
+signal significances of protein binding across biological conditions. Two
+main strategies are widely accepted to accomplish this task. One strategy 
+focuses on potential peak regions in compared samples, and applies peak 
+calling followed by differential binding significance analysis. The other
+tests differential binding significance for genome-wide bins/windows followed
+by mergeing operation on significant windows to nominate report regions.
 
+A particular type of ChIP-Seq data, mainly in protein complex studies, 
+has a bimodel distribution of changes between compared conditions. For this
+data, exsiting methods need to be improved at least in two ways to fit the
+analysis: proper normalization and low coverage consideration. Here, we 
+introduce *ComplexDiff* package to differential binding analysis in protein
+complex ChIP-Seq studies. 
 
 # Getting Started
 
-Load the package in R
+Load the package into R.
 
 ```{r library}
 library(ComplexDiff)
@@ -42,27 +53,121 @@ library(ComplexDiff)
 
 # Preparing Inputs
 
+The input of this package includes a number of ChIP-Seq bam or bigwig files
+and corresponding meta information, *i.e.* sample conditions and batches. 
+Exprienced users can also provide self-generated count matrix for genomic
+regions, and skip read counting using bam or bigwig files.
 
 # Differential Binding Regions
 
-For  algorithms details, please refer to our manuscript [@teng].
+The differential binding analysis introduced in this package, mainly contains
+three steps: reads counting for genomic regions (*regionReads*), size factor
+estimation for normalization (*sizeFac*) and calling for differential binding
+regions (*diffRegions*). In addition, this package provides a separate 
+function to help identify binding types (namely *unimodel* and *bimodel*) for
+a pair of compared ChIP-Seq samples. And another version of differential
+bidning calling is also provided with permutation analysis. For algorithms 
+details, please refer to our manuscript [@teng].
 
 ## Count reads for genomic regions
 
+We illustrate this step by counting reads on a pair of bam files built-in 
+this package. The built-in bam files are generated from protein complex 
+ChIP-Seq data stored in GEO databased with accession id GSM1645714 and 
+GSM1645715. Only a small portion of reads on chromosome 1 are stored in
+these bam files. While chr1 is the only chromosome shown in the headers of 
+these bam files, genomic regions are automatically generated only for chr1,
+followed by reads counting on these regions.
+
+```{r count1, results='hide'}
+bams <- c(system.file("extdata", "control.bam", package="ComplexDiff"),
+          system.file("extdata", "treated.bam", package="ComplexDiff"))
+rc <- regionReads(bams)
+```
+```{r count2}
+names(rc)
+rc$regions
+```
+
+To completely show the whole algorithms in this package, we further saved
+count matrix based on chr10 alignment reads of the same samples to perform
+downsteam analysis. First load this data by:
+
+```{r load}
+data(complex)
+names(complex)
+complex$bins
+```
 
 ## Determine protein binding type
 
+Determine binding types of this protein complex ChIP-Seq data with
+following code. The default of this function generates two plots. For this
+data, a bimodel distribution of fold changes without normalization can be
+clearly visualized based on which binding type 'bimodel' will be concluded.
+
+```{r type}
+chipType(complex$counts)
+```
 
 ## Estimate normalization size factors
 
+In practice, users can skip binding type determination and directly estimate
+size factors once reads are counted from regions, as binding type 
+determination is built into this step as well. As shown in the function help
+page, the size factors are calcualted pair-by-pair with all samples referring
+to the first sample in the count matrix.
+
+Use following code to estimated size factors. Please also read the help page
+of this function to properly provide values for parameter *fold* and *h*. The
+returning values include two parts: size factors and binding types
+of samples by comparing to the first sample. When replicates are provided, 
+replicates of the same condition should have the same binding type, either
+'unimodel' or 'bimodel'. Inconsistent binding types of replicates also
+can happen for various experimental issues. Nevertheless, the strategy of 
+kernal density bump hunting generates robust estimation of size factors
+regardless which binding type being concluded.
+
+```{r sizefac}
+sizefac <- sizeFac(complex$counts)
+sizefac
+```
 
 ## Identify differential binding regions
 
+To call for differential binding regions, one can choose to use with or
+without permutation analysis, since permutation may take some time to
+accomplish. The algorithm detail of this step, please refer to function
+help page and our manuscript [@teng]. 
 
-## Optional permutation analysis
+Use following code for identification without permutation. Here, we use
+simple labels (*ctr* and *tre*) to represent experimental information
+of two samples.
 
+```{r diffnoperm, warning=FALSE}
+meta <- data.frame(cond=c("ctr","tre"))
+dr <- diffRegions(complex$counts,complex$bins,meta,design=~cond,
+                  sizefac$sizefac)
+dr
+```
+
+Alternatively, permutation can be added into analysis using following code.
+For this illustration examples, it will give the same results due to no
+permutation will be performed without replciates.
+
+```{r diffperm, warning=FALSE}
+meta <- data.frame(cond=c("ctr","tre"))
+dr <- diffRegionsWithPerm(complex$counts,complex$bins,meta,design=~cond,
+                  sizefac$sizefac)
+dr
+```
 
 # Summary
 
+In this guide, we illustrated the useage of functions provided in this
+package. They are particularly designed for ChIP-Seq experimental cases
+where changes between conditions have a bimodel distribution, as we shown
+for protein complex data. It is also applicable for normal ChIP-Seq 
+experiments.
 
 # References

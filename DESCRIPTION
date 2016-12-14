@@ -19,6 +19,7 @@ Imports:
     DESeq2,
     limma,
     genefilter
+VignetteBuilder: knitr
 Suggests:
     BiocStyle,
     knitr,
@@ -27,4 +28,5 @@ Suggests:
 URL: https://github.com/tengmx/ComplexDiff
 License: GPL-3
 LazyData: true
+biocViews: Sequencing, ChIPSeq, DifferentialPeakCalling
 RoxygenNote: 5.0.1

@@ -1,0 +1,13 @@
+citEntry(entry = "article",
+         title =
+         paste("ComplexDiff: Differential Binding Estimation for ",
+                "Protein Complexes."),
+         author = personList(as.person("Mingxiang Teng"),
+                             as.person("Robert T. Nakayama"),
+                             as.person("Stephanie C. Hicks"),
+                             as.person("Cigall Kadoch"),
+                             as.person("Rafael A. Irizarry")),
+         journal = "In preparation",
+         year = 2016
+         )
+         

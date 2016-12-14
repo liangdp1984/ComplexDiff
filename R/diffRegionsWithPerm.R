@@ -122,7 +122,7 @@ diffRegionsWithPerm <- function(count, bins, meta, design, sizefac,
         }
     }
     if(ncol(count)==2){
-        cat("No permutation will be performed because of not enough samples!")
+        cat("No permutation performed due to not enough samples!\n")
         ## real test
         observed <- diffRegions(count=count, bins=bins, meta=meta,
                                 design=design, sizefac=sizefac, rccut=rccut,
