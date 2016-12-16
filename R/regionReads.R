@@ -48,7 +48,8 @@
 #' @importFrom rtracklayer BigWigFile
 #' @importFrom rtracklayer summary
 #' @importFrom Rsubread featureCounts
-#'
+#' @importFrom methods is
+#' 
 #' @return
 #' A RangedSummarizedExperiment object containing read counts for genome-wide
 #' bins or given peaks..

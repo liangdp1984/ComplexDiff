@@ -1,6 +1,7 @@
-# ComplexDiff: Differential Binding Estimation for Protein Complexes
+# Differential Binding Estimation for Protein Complexes
 
 ### Introduction
+
 This package provides functions to normalize and estimate 
 differential DNA bindings by protein complexes using ChIP-Seq data.
 
@@ -21,13 +22,9 @@ library(devtools)
 install_github("tengmx/ComplexDiff")
 ```
 
-### Using **ComplexDiff**
-
 After installation, the package can be loaded into R.
 
 ```s
 library(ComplexDiff)
 ```
 
-Detail of how to use this package, please refer to the 
-[vignettes](https://github.com/tengmx/ComplexDiff/blob/master/vignettes/ComplexDiff.html).

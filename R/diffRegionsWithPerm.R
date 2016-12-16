@@ -72,6 +72,10 @@
 #' @import S4Vectors
 #' @import GenomicRanges
 #' @import SummarizedExperiment
+#' @importFrom methods is
+#' @importFrom utils combn
+#' @importFrom stats ecdf
+#' @importFrom stats model.frame
 #'
 #' @return
 #' A GRanges object containing potential regions with differential binding, as
@@ -86,6 +90,7 @@
 #'
 #' ## test sample data
 #' sizefac <- sizeFac(count=complex$counts,plot=TRUE)$sizefac
+#' library(S4Vectors)
 #' meta <- DataFrame(cond=c("ctr","tre"))
 #' dr <- diffRegionsWithPerm(count=complex$counts,bins=complex$bins,
 #'                           meta=meta,design=~cond,sizefac=sizefac)

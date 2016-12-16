@@ -80,6 +80,10 @@
 #' @importFrom limma topTable
 #' @importFrom limma lmFit
 #' @importFrom genefilter rowttests
+#' @importFrom methods is
+#' @importFrom stats model.frame
+#' @importFrom stats model.matrix
+#' @importFrom stats t.test
 #'
 #' @return
 #' A GRanges object containing potential regions with differential binding, as
@@ -94,6 +98,7 @@
 #'
 #' ## test sample data
 #' sizefac <- sizeFac(count=complex$counts,plot=TRUE)$sizefac
+#' library(SummarizedExperiment)
 #' se <- SummarizedExperiment(assays=list(counts=complex$counts),
 #'                            rowRanges=complex$bins,
 #'                            colData=DataFrame(cond=c("ctr","tre")))
@@ -111,7 +116,8 @@ diffRegions <- function(count, bins=NULL, meta=NULL, design, sizefac,
                         diffmeth=c("DESeq2","limma","ttest")){
     stopifnot((is.matrix(count) || is(count,"RangedSummarizedExperiment")) &&
               ncol(count) >= 2)
-    stopifnot(is.null(bins) || (is(bins,"GRanges") && length(bins)==nrow(count)))
+    stopifnot(is.null(bins) || (is(bins,"GRanges") && 
+                                  length(bins)==nrow(count)))
     stopifnot(is.null(meta) || (is(meta,"DataFrame") && ncol(meta)>=1))
     if(is.matrix(count) && (is.null(bins) || is.null(meta)))
         stop("Bins or meta shouldn't be NULL when count is matrix\n")
@@ -213,7 +219,7 @@ diffRegions <- function(count, bins=NULL, meta=NULL, design, sizefac,
             levels <- unique(effects[,2])
             regionpara <- data.frame(apply(logregionrc,1,function(x){
                 tmp <- t.test(x[effects[,2]==levels[1]],
-                              x[effects[,2]==levels[2]],paired=T)
+                              x[effects[,2]==levels[2]],paired=TRUE)
                 c(tmp$stat,tmp$est,tmp$p.value)
             }))
             regiongrg$stat <- regionpara[,1]

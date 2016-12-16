@@ -8,6 +8,10 @@ citEntry(entry = "article",
                              as.person("Cigall Kadoch"),
                              as.person("Rafael A. Irizarry")),
          journal = "In preparation",
-         year = 2016
+         year = 2016,
+         textVersion  = 
+         paste("Teng M, Irizarry RA (2016).",
+               "ComplexDiff: Differential Binding Estimation for",
+               "Protein Complexes.")
          )
          

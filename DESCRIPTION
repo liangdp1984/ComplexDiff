@@ -6,7 +6,7 @@ Description: This package provide functions to estimate differential DNA
 Author: Mingxiang Teng and Rafael A. Irizarry
 Maintainer: Mingxiang Teng <tengmx@gmail.com>
 Depends:
-    R (>= 3.3)
+    R (>= 3.4)
 Imports:
     S4Vectors,
     matrixStats,
@@ -21,7 +21,11 @@ Imports:
     bumphunter,
     DESeq2,
     limma,
-    genefilter
+    genefilter,
+    methods,
+    graphics,
+    stats,
+    utils
 VignetteBuilder: knitr
 Suggests:
     BiocStyle,
@@ -31,5 +35,5 @@ Suggests:
 URL: https://github.com/tengmx/ComplexDiff
 License: GPL-3
 LazyData: true
-biocViews: Sequencing, ChIPSeq, DifferentialPeakCalling
+biocViews: Sequencing, ChIPSeq, Normalization, DifferentialPeakCalling
 RoxygenNote: 5.0.1

@@ -45,6 +45,10 @@
 #' @importFrom matrixStats rowMaxs
 #' @importFrom matrixStats rowDiffs
 #' @import SummarizedExperiment
+#' @importFrom methods is
+#' @importFrom graphics abline
+#' @importFrom graphics layout
+#' @importFrom stats dnorm
 #'
 #' @return
 #' A list with the following conponents:
@@ -125,7 +129,8 @@ sizeFac <- function(count, cutoff=50L, fold=10, h=0.1, plot=FALSE,
             layout(matrix(1:2,1,2))
             plot(A,M,pch=20,cex=0.5,main=cmplxtype)
             abline(h=0,lty=2,col='red',lwd=2)
-            plot(density(M,na.rm = T,adjust=1),xlab='M',main=cmplxtype,lwd=2)
+            plot(density(M,na.rm = TRUE,adjust=1),xlab='M',
+                 main=cmplxtype,lwd=2)
             if(cmplxtype == "bimodel")
                 abline(v=mu,lty=2,col='blue',lwd=2)
             else abline(v=M0,lwd=2,col='blue',lty=2)

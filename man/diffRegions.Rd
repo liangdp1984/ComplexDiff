@@ -86,6 +86,7 @@ names(complex)
 
 ## test sample data
 sizefac <- sizeFac(count=complex$counts,plot=TRUE)$sizefac
+library(SummarizedExperiment)
 se <- SummarizedExperiment(assays=list(counts=complex$counts),
                            rowRanges=complex$bins,
                            colData=DataFrame(cond=c("ctr","tre")))

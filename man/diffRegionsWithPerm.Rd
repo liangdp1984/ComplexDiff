@@ -99,6 +99,7 @@ names(complex)
 
 ## test sample data
 sizefac <- sizeFac(count=complex$counts,plot=TRUE)$sizefac
+library(S4Vectors)
 meta <- DataFrame(cond=c("ctr","tre"))
 dr <- diffRegionsWithPerm(count=complex$counts,bins=complex$bins,
                           meta=meta,design=~cond,sizefac=sizefac)
