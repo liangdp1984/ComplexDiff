@@ -8,10 +8,13 @@ Maintainer: Mingxiang Teng <tengmx@gmail.com>
 Depends:
     R (>= 3.3)
 Imports:
+    S4Vectors,
     matrixStats,
     IRanges,
     GenomeInfoDb,
+    BiocGenerics,
     GenomicRanges,
+    SummarizedExperiment,
     Rsamtools,
     rtracklayer,
     Rsubread,

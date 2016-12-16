@@ -7,7 +7,7 @@ author: |
   | Harvard T.H. Chan School of Public Health, Boston, MA, USA
 date: "`r Sys.Date()`"
 output:
-  BiocStyle::pdf_document:
+  BiocStyle::html_document:
     toc: true
 bibliography: ComplexDiff.bib
 graphics: yes
@@ -82,11 +82,10 @@ followed by reads counting on these regions.
 ```{r count1, results='hide'}
 bams <- c(system.file("extdata", "control.bam", package="ComplexDiff"),
           system.file("extdata", "treated.bam", package="ComplexDiff"))
-rc <- regionReads(bams)
+rc <- regionReads(samples=bams)
 ```
 ```{r count2}
-names(rc)
-rc$regions
+rc
 ```
 
 To completely show the whole algorithms in this package, we further saved
@@ -145,9 +144,11 @@ simple labels (*ctr* and *tre*) to represent experimental information
 of two samples.
 
 ```{r diffnoperm, warning=FALSE}
-meta <- data.frame(cond=c("ctr","tre"))
-dr <- diffRegions(complex$counts,complex$bins,meta,design=~cond,
-                  sizefac$sizefac)
+library(SummarizedExperiment)
+se <- SummarizedExperiment(assays=list(counts=complex$counts),
+                           rowRanges=complex$bins,
+                           colData=DataFrame(cond=c("ctr","tre")))
+dr <- diffRegions(count=se,design=~cond,sizefac=sizefac$sizefac)
 dr
 ```
 
@@ -156,9 +157,9 @@ For this illustration examples, it will give the same results due to no
 permutation will be performed without replciates.
 
 ```{r diffperm, warning=FALSE}
-meta <- data.frame(cond=c("ctr","tre"))
-dr <- diffRegionsWithPerm(complex$counts,complex$bins,meta,design=~cond,
-                  sizefac$sizefac)
+meta <- DataFrame(cond=c("ctr","tre"))
+dr <- diffRegionsWithPerm(count=complex$counts,bins=complex$bins,meta=meta,
+                          design=~cond,sizefac=sizefac$sizefac)
 dr
 ```
 

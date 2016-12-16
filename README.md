@@ -30,4 +30,4 @@ library(ComplexDiff)
 ```
 
 Detail of how to use this package, please refer to the 
-[vignettes](https://github.com/tengmx/ComplexDiff/blob/master/vignettes/ComplexDiff.pdf).
+[vignettes](https://github.com/tengmx/ComplexDiff/blob/master/vignettes/ComplexDiff.html).

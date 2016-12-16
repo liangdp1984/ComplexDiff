@@ -14,8 +14,7 @@
 }
 \description{
 This data contains two compared samples that measures the DNA binding
-difference of protein complex. ChIP-seq reads overlapping with 300bp bins
-are first counted. Only data from chromosome 10 is contained for
-illustration.
+differences of protein complex. ChIP-seq reads are counted for 300bp bins.
+Only data from chromosome 10 is included.
 }
 
