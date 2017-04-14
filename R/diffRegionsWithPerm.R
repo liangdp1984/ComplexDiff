@@ -159,12 +159,12 @@ diffRegionsWithPerm <- function(count, bins=NULL, meta=NULL, design, sizefac,
                             nrow(combs))
             comb2 <- matrix(which(level==(unique(level)[2]))[combs],
                             nrow(combs))
-            comb1 <- comb1[,rep(seq_len(ncol(comb1)),ncol(comb2))]
-            comb2 <- comb2[,rep(seq_len(ncol(comb2)),each=ncol(comb1))]
-            permute <- t(sapply(seq_len(ncol(comb1)),function(i){
+            comb1f <- comb1[,rep(seq_len(ncol(comb1)),ncol(comb2))]
+            comb2f <- comb2[,rep(seq_len(ncol(comb2)),each=ncol(comb1))]
+            permute <- t(sapply(seq_len(ncol(comb1f)),function(i){
                 ranks <- seq_len(ncol(count))
-                tmpidx <- match(c(comb1[,i],comb2[,i]),ranks)
-                ranks[tmpidx] <- c(comb2[,i],comb1[,i])
+                tmpidx <- match(c(comb1f[,i],comb2f[,i]),ranks)
+                ranks[tmpidx] <- c(comb2f[,i],comb1f[,i])
                 ranks
             }))
         }
