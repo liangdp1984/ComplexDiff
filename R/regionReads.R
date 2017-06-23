@@ -49,7 +49,7 @@
 #' @importFrom rtracklayer summary
 #' @importFrom Rsubread featureCounts
 #' @importFrom methods is
-#' 
+#'
 #' @return
 #' A RangedSummarizedExperiment object containing read counts for genome-wide
 #' bins or given peaks..
@@ -113,7 +113,7 @@ regionReads <- function(samples, colData=DataFrame(cond=basename(samples)),
         count <- featureCounts(files=samples, annot.ext=anno,
                                read2pos=read2pos, ignoreDup=ignoreDup
 				)$counts
-        colnames(count) <- NULL
+        rownames(count) <- colnames(count) <- NULL
     }else{
         ## bigwig files
         count <- c()
@@ -128,6 +128,7 @@ regionReads <- function(samples, colData=DataFrame(cond=basename(samples)),
                                             width(meancov) / readlen))
             }
         }
+        rownames(count) <- colnames(count) <- NULL
     }
     ## filter on windows
     if(is.null(peaks) & bincut > 0){
